@@ -136,4 +136,73 @@ document.getElementById('copy-email').addEventListener('click',async function(){
   catch{this.textContent='Email: anveshikakamble@gmail.com';}
   setTimeout(()=>{this.textContent=old;},2200);
 });
+const cursorBulb=document.getElementById('cursor-bulb');
+if(cursorBulb&&window.matchMedia('(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)').matches){
+  document.body.classList.add('has-cursor-bulb');
+  const edgeSize=80;
+  let targetScrollSpeed=0;
+  let edgeScrollSpeed=0;
+  let currentScrollSpeed=0;
+  let scrollFrame=0;
+  let previousFrameTime=0;
+  let lastPointerY=null;
+  let lastPointerTime=0;
+  const autoScroll=time=>{
+    const elapsed=previousFrameTime?Math.min((time-previousFrameTime)/1000,.05):0;
+    previousFrameTime=time;
+    if(elapsed){
+      targetScrollSpeed*=Math.exp(-elapsed/.12);
+      const easing=1-Math.exp(-elapsed/.08);
+      const desiredSpeed=Math.max(-900,Math.min(900,targetScrollSpeed+edgeScrollSpeed));
+      currentScrollSpeed+=(desiredSpeed-currentScrollSpeed)*easing;
+      window.scrollBy(0,currentScrollSpeed*elapsed);
+    }
+    if(!targetScrollSpeed&&!edgeScrollSpeed&&Math.abs(currentScrollSpeed)<2){
+      currentScrollSpeed=0;
+      scrollFrame=0;
+      previousFrameTime=0;
+      document.documentElement.classList.remove('is-pointer-scrolling');
+      return;
+    }
+    scrollFrame=requestAnimationFrame(autoScroll);
+  };
+  const stopAutoScroll=()=>{
+    targetScrollSpeed=0;
+    edgeScrollSpeed=0;
+    lastPointerY=null;
+    lastPointerTime=0;
+  };
+  document.addEventListener('pointermove',event=>{
+    cursorBulb.style.left=event.clientX+'px';
+    cursorBulb.style.top=event.clientY+'px';
+    cursorBulb.classList.add('is-visible');
+    if(event.clientY<edgeSize){
+      const proximity=1-event.clientY/edgeSize;
+      edgeScrollSpeed=-(105+375*proximity*proximity);
+    }else if(event.clientY>window.innerHeight-edgeSize){
+      const proximity=(event.clientY-(window.innerHeight-edgeSize))/edgeSize;
+      edgeScrollSpeed=105+375*proximity*proximity;
+    }else{
+      edgeScrollSpeed=0;
+    }
+    if(lastPointerY!==null){
+      const elapsed=(event.timeStamp-lastPointerTime)/1000;
+      if(elapsed>0){
+        const pointerSpeed=(event.clientY-lastPointerY)/elapsed*.54;
+        targetScrollSpeed=Math.max(-640,Math.min(640,pointerSpeed));
+      }
+    }
+    lastPointerY=event.clientY;
+    lastPointerTime=event.timeStamp;
+    if((targetScrollSpeed||edgeScrollSpeed)&&!scrollFrame){
+      document.documentElement.classList.add('is-pointer-scrolling');
+      scrollFrame=requestAnimationFrame(autoScroll);
+    }
+  },{passive:true});
+  document.documentElement.addEventListener('pointerleave',()=>{
+    cursorBulb.classList.remove('is-visible');
+    stopAutoScroll();
+  });
+  window.addEventListener('blur',stopAutoScroll);
+}
 document.getElementById('year').textContent=String(new Date().getFullYear());
