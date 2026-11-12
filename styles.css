@@ -92,12 +92,6 @@ button:focus-visible,a:focus-visible,textarea:focus-visible {outline-color:#647d
 .core-label {fill:#355d4d}
 .core-small {fill:#607f70}
 
-/* Soft metric strip */
-.proof-strip {background:#edf2ee;border-color:#dce4de}
-.proof-item {border-color:#d6e0d9}
-.proof-item strong,.proof-caption p strong {color:#38534a}
-.proof-item>span,.proof-caption p {color:#667a71}
-.proof-caption .tagline-mark {color:#8b9e8d}
 .section h2,.contact-section h2 {color:#2c4140}
 .section h2 em,.contact-section h2 em {color:#7e7796}
 .section-lede {color:#687a78}
