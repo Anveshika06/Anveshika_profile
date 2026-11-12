@@ -306,3 +306,55 @@ body {font-size:15px}
   .pub-action {font-size:9px}
   .contact-section h2 {font-size:2.25rem}
 }
+
+.section-index {
+  display:inline-flex;
+  align-items:center;
+  width:fit-content;
+  padding:7px 12px;
+  border:1px solid #e0d7e9;
+  border-radius:999px;
+  background:#efeaf5;
+  color:#746084;
+  font-size:14px;
+  line-height:1.35;
+  letter-spacing:.12em;
+}
+.hero-copy > .eyebrow {
+  font-size:15px;
+  letter-spacing:.11em;
+}
+@media(max-width:480px) {
+  .hero-copy > .eyebrow {
+    font-size:12px;
+    letter-spacing:.08em;
+    gap:9px;
+  }
+  .hero-copy > .eyebrow .eyebrow-rule {width:16px}
+}
+
+.cursor-bulb {
+  position:fixed;
+  z-index:999;
+  top:0;
+  left:0;
+  width:12px;
+  height:12px;
+  border:1px solid #9985b8;
+  border-radius:50%;
+  background:#bcaed6;
+  box-shadow:0 0 0 3px rgba(188,174,214,.16),0 0 12px 5px rgba(177,145,226,.3);
+  opacity:0;
+  pointer-events:none;
+  transform:translate(12px,12px);
+  transition:opacity .15s ease;
+}
+.cursor-bulb.is-visible {opacity:1}
+.has-cursor-bulb,.has-cursor-bulb a,.has-cursor-bulb button {
+  cursor:none;
+}
+.has-cursor-bulb textarea {cursor:text}
+html.is-pointer-scrolling {scroll-behavior:auto!important}
+@media (hover:none),(pointer:coarse),(prefers-reduced-motion:reduce) {
+  .cursor-bulb {display:none}
+}
