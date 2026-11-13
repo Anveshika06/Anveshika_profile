@@ -354,7 +354,6 @@ body {font-size:15px}
   cursor:none;
 }
 .has-cursor-bulb textarea {cursor:text}
-html.is-pointer-scrolling {scroll-behavior:auto!important}
 @media (hover:none),(pointer:coarse),(prefers-reduced-motion:reduce) {
   .cursor-bulb {display:none}
 }
