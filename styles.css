@@ -54,11 +54,13 @@ button:focus-visible,a:focus-visible,textarea:focus-visible {outline-color:#647d
 .nav-links .nav-resume:hover {background:#e4eee6;border-color:#799987}
 .nav-resume span {color:#5d8071}
 .eyebrow,.section-index,.role-type {color:#587b70}
-.eyebrow-rule {background:#b4c9be}
+.eyebrow-rule {
+  display:none;
+}
 .signal-dot {background:#719b86;box-shadow:0 0 0 5px rgba(117,158,138,.12)}
 .hero {isolation:isolate}
 .hero h1 {color:#2d403c}
-.headline-accent {color:#65887e}
+.headline-accent {color:#806c96}
 .period {color:#ab96bd}
 .hero-lede {color:#657572}
 .hero-lede strong {color:#344942}
@@ -208,12 +210,17 @@ button:focus-visible,a:focus-visible,textarea:focus-visible {outline-color:#647d
 body {font-size:15px}
 .hero {min-height:630px; padding-top:62px; padding-bottom:78px}
 .hero h1 {
-  font-size:clamp(2.75rem,4.15vw,4.4rem);
+  font-size:clamp(2.55rem,3.75vw,4rem);
   line-height:1.09;
   letter-spacing:-.05em;
   max-width:670px;
   margin-top:24px;
   margin-bottom:22px;
+}
+.headline-prefix {
+  display:inline-block;
+  font-size:.82em;
+  letter-spacing:-.035em;
 }
 .hero-lede {font-size:clamp(15px,1.3vw,17px);line-height:1.65;max-width:525px}
 .hero-meta {margin-top:32px}
